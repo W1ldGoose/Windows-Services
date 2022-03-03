@@ -1,0 +1,36 @@
+﻿<Window x:Class="Windows_Services.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Windows Services" Height="450" Width="800" Background="#595959">
+    <Grid>
+        <Border BorderBrush="#BFAE9F" BorderThickness="4">
+        <ListView Name="servicesList" 
+                  Background="#F2F2F2"
+                  Foreground="#0D0D0D"
+                  ItemsSource="{Binding Services}" 
+                  SelectedItem="{Binding SelectedService}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ServiceName}">Service Name</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DisplayName}">Display Name</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ServiceStatus}">Status</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Account}">Account</GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Run service"
+                              Command="{Binding StartServiceCommand}"
+                              CommandParameter="{Binding SelectedService}"/>
+                    <MenuItem Header="Stop service"
+                              Command="{Binding StopServiceCommand}"
+                              CommandParameter="{Binding SelectedService}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+        </Border>
+    </Grid>
+</Window>
